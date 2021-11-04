@@ -1,5 +1,7 @@
 <?php
 
+namespace berthott\Userstamps;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,9 +16,9 @@ class UserstampServiceProvider extends ServiceProvider
         Blueprint::macro(
             'userstamps',
             function () {
-                $this->unsignedBigInteger('created_by')->nullable()->index();
-                $this->unsignedBigInteger('updated_by')->nullable()->index();
-                $this->unsignedBigInteger('deleted_by')->nullable()->index();
+                $this->unsignedBigInteger('created_by')->nullable();
+                $this->unsignedBigInteger('updated_by')->nullable();
+                $this->unsignedBigInteger('deleted_by')->nullable();
             }
         );
         Blueprint::macro(
@@ -41,7 +43,7 @@ class UserstampServiceProvider extends ServiceProvider
         );
 
         // add config
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'userstamps');
+        // $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'userstamps');
     }
 
     /**
@@ -50,8 +52,8 @@ class UserstampServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // publish config
-        $this->publishes([
+        /* $this->publishes([
             __DIR__.'/../config/config.php' => config_path('userstamps.php'),
-        ], 'config');
+        ], 'config'); */
     }
 }
