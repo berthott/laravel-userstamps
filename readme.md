@@ -12,21 +12,31 @@ $ composer require berthott/laravel-userstamps
 
 * Create your table and corresponding model, eg. with `php artisan make:model YourModel -m`
 * Add `$table->userstamps()` to you migration
-* Add the `Userstamps` Trait to your newly generated model.
+  * Additionaly you must add `$table->softDeletesUserstamp()` when you use the `SoftDeletes` trait on your model
+* Add the `Userstamps` trait to your newly generated model.
 
 ## Options
 
-To change the default options use
+You may change the column names by setting
 ```
-$ php artisan vendor:publish --provider="berthott\Crudable\CrudableServiceProvider" --tag="config"
+const CREATED_BY = 'alt_created_by';
+const UPDATED_BY = 'alt_updated_by';
+const DELETED_BY = 'alt_deleted_by';
 ```
-* `middleware`: an array of middlewares that will be added to the generated routes
-* `namespace`: string or array with one ore multiple namespaces that should be monitored for the Crudable-Trait. Defaults to `App\Models`.
-* `prefix`: route prefix. Defaults to `api`
+Note that you cannot use `$table->userstamps()` but need to define the columns seperately with 
+```
+$table->unsignedBigInteger('alt_created_by')->nullable();
+$table->unsignedBigInteger('alt_updated_by')->nullable();
+$table->unsignedBigInteger('alt_deleted_by')->nullable();
+```
 
 ## Compatibility
 
 Tested with Laravel 8.x.
+
+## Credits
+
+Inspired by https://github.com/WildsideUK/Laravel-Userstamps and https://github.com/hrshadhin/laravel-userstamps.
 
 ## License
 

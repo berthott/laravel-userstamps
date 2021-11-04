@@ -63,9 +63,6 @@ class UserstampsServiceProvider extends ServiceProvider
                 $this->dropForeign(['deleted_by']);
             }
         );
-
-        // add config
-        // $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'userstamps');
     }
 
     /**
@@ -73,9 +70,5 @@ class UserstampsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // publish config
-        /* $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('userstamps.php'),
-        ], 'config'); */
     }
 }
