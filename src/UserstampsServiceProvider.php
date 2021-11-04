@@ -5,7 +5,7 @@ namespace berthott\Userstamps;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
 
-class UserstampServiceProvider extends ServiceProvider
+class UserstampsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

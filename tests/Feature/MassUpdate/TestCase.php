@@ -1,6 +1,6 @@
 <?php
 
-namespace berthott\Userstamps\Tests\Feature\DisabledColumns;
+namespace berthott\Userstamps\Tests\Feature\MassUpdate;
 
 use berthott\Userstamps\UserstampsServiceProvider;
 use Illuminate\Database\Schema\Blueprint;

@@ -2,7 +2,7 @@
 
 namespace berthott\Userstamps\Tests\Feature\AltColumns;
 
-use berthott\Userstamps\UserstampServiceProvider;
+use berthott\Userstamps\UserstampsServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            UserstampServiceProvider::class
+            UserstampsServiceProvider::class
         ];
     }
 
