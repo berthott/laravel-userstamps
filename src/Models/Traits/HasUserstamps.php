@@ -10,22 +10,22 @@ trait HasUserstamps
     public static function bootHasUserstamps()
     {
         static::creating(function (Model $model) {
-            static::updateUserstamp($model, static::getCreatedByColumn(), Auth::id());
-            static::updateUserstamp($model, static::getUpdatedByColumn(), Auth::id());
+            static::updateUserstamp($model, $model->getCreatedByColumn(), Auth::id());
+            static::updateUserstamp($model, $model->getUpdatedByColumn(), Auth::id());
         });
         static::saving(function (Model $model) {
-            static::updateUserstamp($model, static::getUpdatedByColumn(), Auth::id());
+            static::updateUserstamp($model, $model->getUpdatedByColumn(), Auth::id());
         });
         static::updating(function (Model $model) {
-            static::updateUserstamp($model, static::getUpdatedByColumn(), Auth::id());
+            static::updateUserstamp($model, $model->getUpdatedByColumn(), Auth::id());
         });
         if (static::usingSoftDeletes()) {
             static::deleting(function (Model $model) {
-                static::updateUserstamp($model, static::getDeletedByColumn(), Auth::id());
+                static::updateUserstamp($model, $model->getDeletedByColumn(), Auth::id());
                 $model->saveQuietly();
             });
             static::restoring(function (Model $model) {
-                static::updateUserstamp($model, static::getDeletedByColumn(), null);
+                static::updateUserstamp($model, $model->getDeletedByColumn(), null);
             });
         }
     }
@@ -45,17 +45,17 @@ trait HasUserstamps
         return $this->belongsTo($this->getUserClass(), $this->getDeletedByColumn());
     }
 
-    protected function getCreatedByColumn(): string
+    protected function getCreatedByColumn(): string|null
     {
         return defined('static::CREATED_BY') ? static::CREATED_BY : 'created_by';
     }
 
-    protected function getUpdatedByColumn(): string
+    protected function getUpdatedByColumn(): string|null
     {
         return defined('static::UPDATED_BY') ? static::UPDATED_BY : 'updated_by';
     }
 
-    protected function getDeletedByColumn(): string
+    protected function getDeletedByColumn(): string|null
     {
         return defined('static::DELETED_BY') ? static::DELETED_BY : 'deleted_by';
     }
@@ -71,12 +71,12 @@ trait HasUserstamps
         return $usingSoftDeletes;
     }
 
-    protected function getUserClass(): string
+    protected static function getUserClass(): string
     {
         return config('auth.providers.users.model');
     }
 
-    protected static function updateUserstamp(Model &$model, string $column, mixed $value)
+    protected static function updateUserstamp(Model &$model, ?string $column, mixed $value)
     {
         if (!is_null($column) && !$model->isDirty($column)) {
             $model->{$column} = $value;
