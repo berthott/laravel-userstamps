@@ -18,6 +18,11 @@ class UserstampServiceProvider extends ServiceProvider
             function () {
                 $this->unsignedBigInteger('created_by')->nullable();
                 $this->unsignedBigInteger('updated_by')->nullable();
+            }
+        );
+        Blueprint::macro(
+            'softDeletesUserstamp',
+            function () {
                 $this->unsignedBigInteger('deleted_by')->nullable();
             }
         );
@@ -26,19 +31,36 @@ class UserstampServiceProvider extends ServiceProvider
             function () {
                 $this->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
                 $this->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            }
+        );
+        Blueprint::macro(
+            'addForeignSoftDeletesUserstamp',
+            function () {
                 $this->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
             }
         );
         Blueprint::macro(
             'dropUserstamps',
             function () {
-                $this->dropColumn(['created_by', 'updated_by', 'deleted_by']);
+                $this->dropColumn(['created_by', 'updated_by']);
+            }
+        );
+        Blueprint::macro(
+            'dropSoftDeletesUserstamp',
+            function () {
+                $this->dropColumn(['deleted_by']);
             }
         );
         Blueprint::macro(
             'dropForeignUserstamps',
             function () {
-                $this->dropForeign(['created_by', 'updated_by', 'deleted_by']);
+                $this->dropForeign(['created_by', 'updated_by']);
+            }
+        );
+        Blueprint::macro(
+            'dropForeignSoftDeletesUserstamp',
+            function () {
+                $this->dropForeign(['deleted_by']);
             }
         );
 
