@@ -32,7 +32,7 @@ $table->unsignedBigInteger('alt_deleted_by')->nullable();
 
 ## Compatibility
 
-Tested with Laravel 8.x.
+Tested with Laravel 10.x.
 
 ## Credits
 
@@ -40,4 +40,4 @@ Inspired by https://github.com/WildsideUK/Laravel-Userstamps and https://github.
 
 ## License
 
-See [License File](license.md). Copyright © 2021 Jan Bladt.
+See [License File](license.md). Copyright © 2023 Jan Bladt.
