@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 trait HasUserstamps
 {
+    /**
+     * Boot the trait.
+     * 
+     * Intercept with all crud methods and add the current userstamps.
+     */
     public static function bootHasUserstamps()
     {
         static::creating(function (Model $model) {
@@ -30,16 +35,31 @@ trait HasUserstamps
         }
     }
     
+    /**
+     * Return the created_by user
+     * 
+     * @api
+     */
     public function creator()
     {
         return $this->belongsTo($this->getUserClass(), $this->getCreatedByColumn());
     }
-
+    
+    /**
+     * Return the updated_by user
+     * 
+     * @api
+     */
     public function editor()
     {
         return $this->belongsTo($this->getUserClass(), $this->getUpdatedByColumn());
     }
 
+    /**
+     * Return the deleted_by user
+     * 
+     * @api
+     */
     public function destroyer()
     {
         return $this->belongsTo($this->getUserClass(), $this->getDeletedByColumn());
