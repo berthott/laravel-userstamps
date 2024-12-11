@@ -1,3 +1,5 @@
+![test workflow](https://github.com/berthott/laravel-userstamps/actions/workflows/test.yml/badge.svg)
+
 # Laravel-Userstamps
 
 A helper to maintain Userstamps in Laravel. 
